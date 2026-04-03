@@ -1,38 +1,18 @@
-name: Auto Merge and Deploy
+name: CI/CD Demo
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-  pull_request_target:
-    types: [opened, synchronize, reopened]
-
-permissions:
-  contents: write
-  pull-requests: write
+  push:
+    branches: [ main ]
 
 jobs:
-  automerge:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: Verify index.html exists
-        id: check-file
-        run: |
-          if [ -f "index.html" ]; then
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
+      - name: Install dependencies
+        run: npm install
 
-      - name: Auto-merge PR
-        if: steps.check-file.outputs.exists == 'true'
-        uses: pascalgn/automerge-action@v0.16.3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          merge-method: squash
-          skip-review: true
-          skip-approvals: true
-          merge-commit-message: "Auto-merged: PR #${{ github.event.number }}"
+      - name: Run tests
+        run: npm test
