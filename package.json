@@ -5,6 +5,10 @@
     "test": "jest",
     "build": "mkdir -p dist && echo '<h1>Deployed!</h1>' > dist/index.html"
   },
+  "scripts": {
+  "test": "jest",
+  "build": "mkdir -p dist && cp src/index.html dist/index.html"
+  }
   "devDependencies": {
     "jest": "^29.0.0"
   }
