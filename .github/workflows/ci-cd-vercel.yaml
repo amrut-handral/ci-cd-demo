@@ -36,7 +36,7 @@ jobs:
 
     env:
       SCAN_PATH: "."
-      POLICY: "Default IaC policy"
+      POLICY: "Secret Policy - Amrut"
 
     defaults:
       run:
