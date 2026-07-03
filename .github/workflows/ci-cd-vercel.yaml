@@ -36,7 +36,7 @@ jobs:
 
     env:
       SCAN_PATH: "."
-      POLICY: "Secret Policy - Amrut"
+      POLICY: "Secret Policy_Amrut"
 
     defaults:
       run:
